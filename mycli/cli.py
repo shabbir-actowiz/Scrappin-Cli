@@ -7,13 +7,19 @@ COMMANDS = {
 
 def main():
     if len(sys.argv) < 3:
-        print("Usage: mycli <command> <project_name>")
+        print("Usage: scrapping-cli startproject <project_name>")
         return
 
     command = sys.argv[1]
     args = sys.argv[2:]
 
-    if command in COMMANDS:
-        COMMANDS[command](*args)
-    else:
+    if command not in COMMANDS:
         print(f"Unknown command: {command}")
+        print("Available commands: startproject")
+        return
+
+    COMMANDS[command](*args)
+
+
+if __name__ == "__main__":
+    main()

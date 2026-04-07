@@ -1,9 +1,10 @@
 import os
 import shutil
-import pkg_resources
+from importlib.resources import files
+
 
 def run(project_name):
-    template_dir = pkg_resources.resource_filename("mycli", "template")
+    template_dir = files("mycli").joinpath("template")
     target_dir = os.path.abspath(project_name)
 
     if os.path.exists(target_dir):
@@ -13,7 +14,7 @@ def run(project_name):
     shutil.copytree(
         template_dir,
         target_dir,
-        ignore=shutil.ignore_patterns("__pycache__", "*.pyc", ".DS_Store")
+        ignore=shutil.ignore_patterns("__pycache__", "*.pyc"),
     )
 
     print(f"Project '{project_name}' created successfully!")
